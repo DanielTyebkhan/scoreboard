@@ -1,9 +1,11 @@
+mod responses;
+use crate::responses::health::{self, HealthResponse};
 use axum::{Router, routing::get};
 use std::net::SocketAddr;
 use tokio::net::TcpListener;
 
-async fn health_check() -> &'static str {
-    "API running"
+async fn health_check() -> axum::Json<HealthResponse> {
+    axum::Json(HealthResponse::healthy())
 }
 
 #[tokio::main]
