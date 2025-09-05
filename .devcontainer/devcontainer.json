@@ -8,5 +8,8 @@
         "extensions": [
             "rust-lang.rust-analyzer"
         ]
-    }
+    },
+    "mounts": [
+        "source=${env:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+    ]
 }
