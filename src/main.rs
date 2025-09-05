@@ -1,11 +1,17 @@
 mod responses;
-use crate::responses::health::{self, HealthResponse};
+use crate::responses::health::HealthResponse;
 use axum::{Router, routing::get};
 use std::net::SocketAddr;
 use tokio::net::TcpListener;
 
+const IS_HEALTHY: bool = true;
+
 async fn health_check() -> axum::Json<HealthResponse> {
-    axum::Json(HealthResponse::healthy())
+    let res = match IS_HEALTHY {
+        true => HealthResponse::healthy(),
+        false => HealthResponse::unhealthy(),
+    };
+    axum::Json(res)
 }
 
 #[tokio::main]
